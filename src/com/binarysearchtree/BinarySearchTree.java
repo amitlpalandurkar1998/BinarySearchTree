@@ -44,6 +44,7 @@ public class BinarySearchTree {
                 pushOtherValue();
                 break;
             case 2 :
+                printTree();
                 break;
             default :
                 System.out.println("\nPlease Enter Valid input.\n");
@@ -60,5 +61,21 @@ public class BinarySearchTree {
         int otherNodeNum = scanner.nextInt();
         pushValue(rootHead,otherNodeNum);
     }
+    public void printTree() {
+        System.out.println("\nBST Tree:\n");
+        System.out.println("\nLeft-->Root<--Right\n");
+        printInorder(rootHead);
+    }
 
+    private void printInorder(Node node) {
+        if (node != null) {
+            printInorder(node.left);
+            if (node.data<rootHead.data){
+                System.out.print(node.data + "-->");
+            }else {
+                System.out.print(node.data + "<--");
+            }
+            printInorder(node.right);
+        }
+    }
 }
