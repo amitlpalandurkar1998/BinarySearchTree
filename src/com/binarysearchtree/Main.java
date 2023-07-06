@@ -1,10 +1,7 @@
 package com.binarysearchtree;
-
-
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
-        
+        BinarySearchTree bst = new BinarySearchTree();
+        bst.welcomePage();
     }
 }
