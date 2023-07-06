@@ -31,6 +31,7 @@ public class BinarySearchTree {
 
         System.out.println("\nEnter '1' to Add Other Node.");
         System.out.println("Enter '2' to display the tree.");
+        System.out.println("Enter '3' to Search Number.");
         System.out.println("Enter '0' to Exit.");
         System.out.print("Enter the Input : ");
         int input = scanner.nextInt();
@@ -38,13 +39,17 @@ public class BinarySearchTree {
         switch (input){
             case 0 :
                 System.out.println("\nThank You.....!");
-                pushValue(null,0);
+                exit();
                 break;
             case 1 :
                 pushOtherValue();
                 break;
             case 2 :
                 printTree();
+                pushOtherValue();
+                break;
+            case 3 :
+                searchNumInTree();
                 break;
             default :
                 System.out.println("\nPlease Enter Valid input.\n");
@@ -61,9 +66,45 @@ public class BinarySearchTree {
         int otherNodeNum = scanner.nextInt();
         pushValue(rootHead,otherNodeNum);
     }
+    public void searchNumInTree(){
+        boolean checkInLeft=true;
+        boolean checkInRight=true;
+        System.out.println("Enter The Number That You Want to Search : ");
+        int searchNum = scanner.nextInt();
+        if (rootHead.data==searchNum){
+            System.out.println(searchNum+" is Found. It is a Root Head Node Value.");
+            checkInLeft=false;
+            checkInRight=false;
+        }else {
+            check(rootHead,searchNum);
+        }
+        if (checkInLeft){
+            Node node = rootHead;
+                if (node != null) {
+                    Node tempLeft = node.left;
+                    if (tempLeft.data==searchNum){
+                        System.out.println(searchNum+" is Found. And Is Left Side Of The Tree.");
+                        checkInRight=false;
+                    }else {
+                        System.out.println(searchNum+" is Not Found.");
+                    }
+            }
+        }
+        if (checkInRight){
+            Node node = rootHead;
+            if (node != null) {
+                Node tempRight = node.right;
+                if (tempRight.data==searchNum){
+                    System.out.println(searchNum+" is Found. And Is Right Side Of The Tree.");
+                }else {
+                    System.out.println(searchNum+" is Not Found.");
+                }
+            }
+        }
+    }
     public void printTree() {
         System.out.println("\nBST Tree:\n");
-        System.out.println("\nLeft-->Root<--Right\n");
+        System.out.println("Left-->Root<--Right\n");
         printInorder(rootHead);
     }
 
@@ -78,4 +119,20 @@ public class BinarySearchTree {
             printInorder(node.right);
         }
     }
+    private void check(Node node, int searchNum) {
+        if (node != null) {
+            check(node.left,searchNum);
+            if (node.data<rootHead.data){
+                if (node.data==searchNum){
+                    System.out.println(searchNum+" is Found. And Is Left Side Of The Tree.");
+                }
+            }else {
+                if (node.data==searchNum){
+                    System.out.println(searchNum+" is Found. And Is Right Side Of The Tree.");
+                }
+            }
+            check(node.right,searchNum);
+        }
+    }
+    private void exit(){}
 }
